@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Максим Северин](https://up.htmlacademy.ru/javascript/17/user/781865).
-* Наставник: `Неизвестно`.
+* Наставник: [Евгений Щеколдин](https://htmlacademy.ru/profile/id861059).
 
 ---
 
