@@ -133,10 +133,7 @@ setEffectLevel();
 // валидация поля "Комментарий" в форме
 
 var textArea = uploadImgForm.querySelector('.text__description');
-
-textArea.addEventListener('keydown', function () { // ограничение в 140 символов
-  textArea.value = textArea.value.substr(0, 140);
-});
+textArea.setAttribute('maxlength', '140');
 
 textArea.addEventListener('focus', function () { // убирает закрытие формы по нажатию Esc при фокусе на textarea
   document.removeEventListener('keydown', onFormEscPress);
