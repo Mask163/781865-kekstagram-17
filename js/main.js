@@ -129,3 +129,16 @@ var setEffectLevel = function () { // изменяет уровень насыщ
 };
 
 setEffectLevel();
+
+// валидация поля "Комментарий" в форме
+
+var textArea = uploadImgForm.querySelector('.text__description');
+textArea.setAttribute('maxlength', '140');
+
+textArea.addEventListener('focus', function () { // убирает закрытие формы по нажатию Esc при фокусе на textarea
+  document.removeEventListener('keydown', onFormEscPress);
+});
+
+textArea.addEventListener('blur', function () { // возвращает закрытие формы по нажатию Esc при смене фокуса с textarea
+  document.addEventListener('keydown', onFormEscPress);
+});
