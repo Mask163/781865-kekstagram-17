@@ -91,6 +91,8 @@ var setFilter = function (radio, effect) { // устанавливает на и
       previewImg.classList.remove(previewImg.classList[0]);
       previewImg.classList.add(effect);
       previewImg.style.filter = '';
+      effectLevelPin.style.left = '100%';
+      effectLevelDepth.style.width = '100%';
     } else {
       previewImg.classList.add(effect);
       previewImg.style.filter = '';
@@ -108,8 +110,8 @@ for (var i = 0; i < radioEffects.length; i++) {
   setFilter(radioEffects[i], previewEffects[i].classList[1]);
 }
 
-var setEffectLevel = function () { // изменяет уровень насыщенности фильтра для изображения при отпускании спина
-  effectLevelPin.addEventListener('mouseup', function () {
+var setEffectLevel = function (action) { // изменяет уровень насыщенности фильтра для изображения при отпускании спина
+  effectLevelPin.addEventListener(action, function () {
     var coefficient = effectLevelPin.style.left.substr(0, effectLevelPin.style.left.length - 1) / 100;
     var currentFilter = previewImg.className;
     effectLevelValue.textContent = coefficient;
@@ -128,8 +130,6 @@ var setEffectLevel = function () { // изменяет уровень насыщ
   });
 };
 
-setEffectLevel();
-
 // валидация поля "Комментарий" в форме
 
 var textArea = uploadImgForm.querySelector('.text__description');
@@ -141,4 +141,51 @@ textArea.addEventListener('focus', function () { // убирает закрыт�
 
 textArea.addEventListener('blur', function () { // возвращает закрытие формы по нажатию Esc при смене фокуса с textarea
   document.addEventListener('keydown', onFormEscPress);
+});
+
+// перетаскивание ползунка
+
+var EFFECT_LVL_LINE_WIDTH = 453;
+
+effectLevelPin.addEventListener('mousedown', function (evt) {
+  evt.preventDefault();
+  console.log(effectLevelValue.textContent);
+
+  var startCoord = {
+    x: evt.clientX
+  };
+
+  var onMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+
+    var shift = {
+      x: startCoord.x - moveEvt.clientX
+    };
+
+    startCoord = {
+      x: moveEvt.clientX
+    };
+
+    effectLevelPin.style.left = ((effectLevelPin.offsetLeft - shift.x) / EFFECT_LVL_LINE_WIDTH * 100) + '%';
+    if (effectLevelPin.offsetLeft > EFFECT_LVL_LINE_WIDTH) {
+      effectLevelPin.style.left = 100 + '%';
+    } else if (effectLevelPin.offsetLeft < 0) {
+      effectLevelPin.style.left = 0 + '%';
+    }
+
+    effectLevelDepth.style.width = effectLevelPin.style.left;
+
+    setEffectLevel('mousemove');
+  };
+
+  var onMouseUp = function (upEvt) {
+    upEvt.preventDefault();
+    setEffectLevel('mouseup');
+
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  };
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
 });
