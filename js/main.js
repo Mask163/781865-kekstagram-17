@@ -149,7 +149,6 @@ var EFFECT_LVL_LINE_WIDTH = 453;
 
 effectLevelPin.addEventListener('mousedown', function (evt) {
   evt.preventDefault();
-  console.log(effectLevelValue.textContent);
 
   var startCoord = {
     x: evt.clientX
