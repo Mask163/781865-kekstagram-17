@@ -16,7 +16,6 @@
   var openForm = function () {
     uploadImgForm.classList.remove('hidden');
     document.addEventListener('keydown', onFormEscPress);
-
   };
 
   var closeForm = function () {
