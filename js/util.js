@@ -9,6 +9,16 @@
   var PHOBOS_FILTER = 'effects__preview--phobos';
   var HEAT_FILTER = 'effects__preview--heat';
   var EFFECT_LVL_LINE_WIDTH = 453;
+  
+  var deleteAllElements = function (elements) {
+    elements.forEach(function (element) {
+      element.remove();
+    });
+  };
+  
+  var getRandomInt = function (min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  };
 
   window.util = {
     ESC_KEYCODE: ESC_KEYCODE,
@@ -18,6 +28,8 @@
     MARVIN_FILTER: MARVIN_FILTER,
     PHOBOS_FILTER: PHOBOS_FILTER,
     HEAT_FILTER: HEAT_FILTER,
-    EFFECT_LVL_LINE_WIDTH: EFFECT_LVL_LINE_WIDTH
+    EFFECT_LVL_LINE_WIDTH: EFFECT_LVL_LINE_WIDTH,
+    deleteAllElements: deleteAllElements,
+    getRandomInt: getRandomInt
   };
 })();

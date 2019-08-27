@@ -40,12 +40,6 @@
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  var deleteAllElements = window.debounce(function (elements) {
-    elements.forEach(function (element) {
-      element.remove();
-    });
-  });
-
   var getActive = function (button) {
     button.addEventListener('click', function () {
       var activeButton = document.querySelector('.img-filters__button--active');
@@ -59,14 +53,10 @@
     getActive(filterButtons[i]);
   }
 
-  var getRandomInt = function (min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  };
-
   var shuffleArray = function (elements) {
     var number = elements.length;
     while (number--) {
-      var j = getRandomInt(0, number);
+      var j = window.util.getRandomInt(0, number);
       var temp = elements[j];
       elements[j] = elements[number];
       elements[number] = temp;
@@ -74,12 +64,12 @@
     return elements;
   };
 
-  var updateImages = function () {
+  var updateImages = window.debounce(function () {
     for (var j = 0; j < filterButtons.length; j++) {
       var activeButton = document.querySelector('.img-filters__button--active');
       var currentImages = document.querySelectorAll('.picture');
 
-      deleteAllElements(currentImages);
+      window.util.deleteAllElements(currentImages);
 
       if (activeButton.id === filterPopular.id) {
         createFotos(images);
@@ -97,7 +87,7 @@
         createFotos(discussedImages);
       }
     }
-  };
+  });
 
   window.load(successHandler, errorHandler);
 })();
