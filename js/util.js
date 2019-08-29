@@ -19,6 +19,10 @@
   var getRandomInt = function (min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
   };
+  
+  var giveInvisibility = function (object) {
+    object.classList.add('visually-hidden');
+  };
 
   window.util = {
     ESC_KEYCODE: ESC_KEYCODE,
@@ -30,6 +34,7 @@
     HEAT_FILTER: HEAT_FILTER,
     EFFECT_LVL_LINE_WIDTH: EFFECT_LVL_LINE_WIDTH,
     deleteAllElements: deleteAllElements,
-    getRandomInt: getRandomInt
+    getRandomInt: getRandomInt,
+    giveInvisibility: giveInvisibility
   };
 })();

@@ -11,7 +11,7 @@
     xhr.addEventListener('load', function () {
       if (xhr.status === 200) {
         onSuccess(xhr.response);
-        console.log(xhr.response[0].comments);
+        console.log(xhr.response);
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
       }
