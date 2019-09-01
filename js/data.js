@@ -9,6 +9,7 @@
   var filterDiscussed = imgFilters.querySelector('#filter-discussed');
   var filterButtons = document.querySelectorAll('.img-filters__button');
   var images = [];
+  var imgs;
 
   var successHandler = function (data) {
     imgFilters.classList.remove('img-filters--inactive');
@@ -22,8 +23,9 @@
 
     for (var i = 0; i < photos.length; i++) {
       var photoElement = photoTemplate.cloneNode(true);
+      photoElement.dataset.index = i;
       photoElement.children[0].src = photos[i].url;
-      photoElement.querySelector('.picture__comments').textContent = photos[i].comments;
+      photoElement.querySelector('.picture__comments').textContent = photos[i].comments.length;
       photoElement.querySelector('.picture__likes').textContent = photos[i].likes;
       photoContainer.appendChild(photoElement);
     }
@@ -68,24 +70,32 @@
     for (var j = 0; j < filterButtons.length; j++) {
       var activeButton = document.querySelector('.img-filters__button--active');
       var currentImages = document.querySelectorAll('.picture');
-
+      
       window.util.deleteAllElements(currentImages);
 
       if (activeButton.id === filterPopular.id) {
-        createFotos(images);
+        imgs = images;
       }
       if (activeButton.id === filterNew.id) {
-        var randomImages = images.slice();
-        createFotos(shuffleArray(randomImages).slice(0, QUANTITY_OF_NEW_PHOTOS));
+//        var randomImages = images.slice();
+//        createFotos(shuffleArray(randomImages).slice(0, QUANTITY_OF_NEW_PHOTOS));
+        
+        imgs = shuffleArray(images.slice()).slice(0, QUANTITY_OF_NEW_PHOTOS);
       }
       if (activeButton.id === filterDiscussed.id) {
-        var discussedImages = images.slice();
-        discussedImages.sort(function (a, b) {
+//        var discussedImages = images.slice();
+//        discussedImages.sort(function (a, b) {
+//          return b.comments.length - a.comments.length;
+//        });
+//
+//        createFotos(discussedImages);
+        imgs = images.slice().sort(function (a, b) {
           return b.comments.length - a.comments.length;
         });
-
-        createFotos(discussedImages);
+        
       }
+      
+      createFotos(imgs);
     }
   });
 
