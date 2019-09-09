@@ -99,6 +99,19 @@
   textArea.addEventListener('blur', function () { // возвращает закрытие формы по нажатию Esc при смене фокуса с textarea
     document.addEventListener('keydown', onFormEscPress);
   });
+  
+//  валидация поля "хэш-тег" в форме
+  
+  var textHashtags = uploadImgForm.querySelector('.text__hashtags');
+  
+  textHashtags.addEventListener('input', function () {
+    var hashtagsArray = textHashtags.value.split;
+    
+    for (var j = 0; j < hashtagsArray.length; j++) {
+      hashtagsArray[j]
+    }
+  });
+  
 
   // перетаскивание ползунка
 

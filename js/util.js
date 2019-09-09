@@ -23,6 +23,17 @@
   var giveInvisibility = function (object) {
     object.classList.add('visually-hidden');
   };
+  
+  var shuffleArray = function (elements) {
+    var number = elements.length;
+    while (number--) {
+      var j = window.util.getRandomInt(0, number);
+      var temp = elements[j];
+      elements[j] = elements[number];
+      elements[number] = temp;
+    }
+    return elements;
+  };
 
   window.util = {
     ESC_KEYCODE: ESC_KEYCODE,
@@ -35,6 +46,7 @@
     EFFECT_LVL_LINE_WIDTH: EFFECT_LVL_LINE_WIDTH,
     deleteAllElements: deleteAllElements,
     getRandomInt: getRandomInt,
-    giveInvisibility: giveInvisibility
+    giveInvisibility: giveInvisibility,
+    shuffleArray: shuffleArray
   };
 })();
